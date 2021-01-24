@@ -14,11 +14,8 @@ import javax.persistence.Id;
 public class SellerInfo {
 
     @Id
-    private String sellerId;
-
+    private Integer sellerId;
     private String username;
-
     private String password;
-
-    private String openid;
+    private String openId;
 }
