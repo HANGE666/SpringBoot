@@ -1,6 +1,6 @@
 package com.imooc.repository;
 
-import com.imooc.entity.OrderDetail;
+import com.imooc.dataobject.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

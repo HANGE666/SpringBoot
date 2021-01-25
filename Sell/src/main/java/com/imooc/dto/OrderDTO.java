@@ -2,7 +2,7 @@ package com.imooc.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.imooc.entity.OrderDetail;
+import com.imooc.dataobject.OrderDetail;
 import com.imooc.enums.OrderStatusEnum;
 import com.imooc.enums.PayStatusEnum;
 import com.imooc.utils.EnumUtil;
@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 //@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 //@JsonInclude(JsonInclude.Include.NON_NULL)
-public class OrderDto {
+public class OrderDTO {
 
     /** 订单id. */
     private String orderId;

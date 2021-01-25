@@ -1,4 +1,4 @@
-package com.imooc.entity;
+package com.imooc.dataobject;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -14,18 +14,25 @@ import java.math.BigDecimal;
 @Entity
 @Data
 public class OrderDetail {
+
     @Id
-    private Integer detailId;
+    private String detailId;
+
     /** 订单id. */
-    private Integer orderId;
+    private String orderId;
+
     /** 商品id. */
-    private Integer productId;
+    private String productId;
+
     /** 商品名称. */
     private String productName;
+
     /** 商品单价. */
     private BigDecimal productPrice;
+
     /** 商品数量. */
     private Integer productQuantity;
+
     /** 商品小图. */
     private String productIcon;
 }

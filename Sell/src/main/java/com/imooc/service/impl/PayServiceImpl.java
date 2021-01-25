@@ -1,6 +1,6 @@
 package com.imooc.service.impl;
 
-import com.imooc.dto.OrderDto;
+import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
@@ -34,7 +34,7 @@ public class PayServiceImpl implements PayService {
     private OrderService orderService;
 
     @Override
-    public PayResponse create(OrderDto orderDTO) {
+    public PayResponse create(OrderDTO orderDTO) {
         PayRequest payRequest = new PayRequest();
         payRequest.setOpenid(orderDTO.getBuyerOpenid());
         payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
@@ -59,7 +59,7 @@ public class PayServiceImpl implements PayService {
         log.info("【微信支付】异步通知, payResponse={}", JsonUtil.toJson(payResponse));
 
         //查询订单
-        OrderDto orderDTO = orderService.findOne(payResponse.getOrderId());
+        OrderDTO orderDTO = orderService.findOne(payResponse.getOrderId());
 
         //判断订单是否存在
         if (orderDTO == null) {
@@ -87,7 +87,7 @@ public class PayServiceImpl implements PayService {
      * @param orderDTO
      */
     @Override
-    public RefundResponse refund(OrderDto orderDTO) {
+    public RefundResponse refund(OrderDTO orderDTO) {
         RefundRequest refundRequest = new RefundRequest();
         refundRequest.setOrderId(orderDTO.getOrderId());
         refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());

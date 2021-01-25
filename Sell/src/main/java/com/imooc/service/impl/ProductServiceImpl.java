@@ -1,7 +1,7 @@
 package com.imooc.service.impl;
 
-import com.imooc.dto.CartDto;
-import com.imooc.entity.ProductInfo;
+import com.imooc.dataobject.ProductInfo;
+import com.imooc.dto.CartDTO;
 import com.imooc.enums.ProductStatusEnum;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
@@ -47,8 +47,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void increaseStock(List<CartDto> cartDtoList) {
-        for (CartDto cartDTO: cartDtoList) {
+    public void increaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO: cartDTOList) {
             ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -63,8 +63,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void decreaseStock(List<CartDto> cartDtoList) {
-        for (CartDto cartDTO: cartDtoList) {
+    public void decreaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO: cartDTOList) {
             ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);

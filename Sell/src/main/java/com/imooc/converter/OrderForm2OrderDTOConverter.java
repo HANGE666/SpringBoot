@@ -2,8 +2,8 @@ package com.imooc.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.imooc.dto.OrderDto;
-import com.imooc.entity.OrderDetail;
+import com.imooc.dataobject.OrderDetail;
+import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.form.OrderForm;
@@ -17,11 +17,11 @@ import java.util.List;
  * 2017-06-18 23:41
  */
 @Slf4j
-public class OrderForm2OrderDtoConverter {
+public class OrderForm2OrderDTOConverter {
 
-    public static OrderDto convert(OrderForm orderForm) {
+    public static OrderDTO convert(OrderForm orderForm) {
         Gson gson = new Gson();
-        OrderDto orderDTO = new OrderDto();
+        OrderDTO orderDTO = new OrderDTO();
 
         orderDTO.setBuyerName(orderForm.getName());
         orderDTO.setBuyerPhone(orderForm.getPhone());

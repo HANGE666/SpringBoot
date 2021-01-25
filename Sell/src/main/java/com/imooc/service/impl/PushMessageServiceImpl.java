@@ -1,7 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.config.WechatAccountConfig;
-import com.imooc.dto.OrderDto;
+import com.imooc.dto.OrderDTO;
 import com.imooc.service.PushMessageService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -29,7 +29,7 @@ public class PushMessageServiceImpl implements PushMessageService {
     private WechatAccountConfig accountConfig;
 
     @Override
-    public void orderStatus(OrderDto orderDTO) {
+    public void orderStatus(OrderDTO orderDTO) {
         WxMpTemplateMessage templateMessage = new WxMpTemplateMessage();
         templateMessage.setTemplateId(accountConfig.getTemplateId().get("orderStatus"));
         templateMessage.setToUser(orderDTO.getBuyerOpenid());

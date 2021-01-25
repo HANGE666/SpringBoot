@@ -1,6 +1,6 @@
 package com.imooc.repository;
 
-import com.imooc.entity.SellerInfo;
+import com.imooc.dataobject.SellerInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

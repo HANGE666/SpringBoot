@@ -11,7 +11,7 @@ import java.util.List;
  * 2017-05-12 14:20
  */
 @Data
-public class ProductVo {
+public class ProductVO {
 
     @JsonProperty("name")
     private String categoryName;
@@ -20,5 +20,5 @@ public class ProductVo {
     private Integer categoryType;
 
     @JsonProperty("foods")
-    private List<ProductInfoVo> productInfoVOList;
+    private List<ProductInfoVO> productInfoVOList;
 }

@@ -3,7 +3,7 @@ package com.imooc.controller;
 import com.imooc.config.ProjectUrlConfig;
 import com.imooc.constant.CookieConstant;
 import com.imooc.constant.RedisConstant;
-import com.imooc.entity.SellerInfo;
+import com.imooc.dataobject.SellerInfo;
 import com.imooc.enums.ResultEnum;
 import com.imooc.service.SellerService;
 import com.imooc.utils.CookieUtil;

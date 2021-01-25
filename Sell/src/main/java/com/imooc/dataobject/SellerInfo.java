@@ -1,4 +1,4 @@
-package com.imooc.entity;
+package com.imooc.dataobject;
 
 import lombok.Data;
 
@@ -14,8 +14,11 @@ import javax.persistence.Id;
 public class SellerInfo {
 
     @Id
-    private Integer sellerId;
+    private String sellerId;
+
     private String username;
+
     private String password;
-    private String openId;
+
+    private String openid;
 }

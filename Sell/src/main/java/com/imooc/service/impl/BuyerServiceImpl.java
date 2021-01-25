@@ -1,6 +1,6 @@
 package com.imooc.service.impl;
 
-import com.imooc.dto.OrderDto;
+import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.BuyerService;
@@ -21,13 +21,13 @@ public class BuyerServiceImpl implements BuyerService {
     private OrderService orderService;
 
     @Override
-    public OrderDto findOrderOne(String openid, String orderId) {
+    public OrderDTO findOrderOne(String openid, String orderId) {
         return checkOrderOwner(openid, orderId);
     }
 
     @Override
-    public OrderDto cancelOrder(String openid, String orderId) {
-        OrderDto orderDTO = checkOrderOwner(openid, orderId);
+    public OrderDTO cancelOrder(String openid, String orderId) {
+        OrderDTO orderDTO = checkOrderOwner(openid, orderId);
         if (orderDTO == null) {
             log.error("【取消订单】查不到改订单, orderId={}", orderId);
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
@@ -36,8 +36,8 @@ public class BuyerServiceImpl implements BuyerService {
         return orderService.cancel(orderDTO);
     }
 
-    private OrderDto checkOrderOwner(String openid, String orderId) {
-        OrderDto orderDTO = orderService.findOne(orderId);
+    private OrderDTO checkOrderOwner(String openid, String orderId) {
+        OrderDTO orderDTO = orderService.findOne(orderId);
         if (orderDTO == null) {
             return null;
         }

@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import com.imooc.dto.OrderDto;
+import com.imooc.dto.OrderDTO;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
@@ -33,7 +33,7 @@ public class PayController {
                                @RequestParam("returnUrl") String returnUrl,
                                Map<String, Object> map) {
         //1. 查询订单
-        OrderDto orderDTO = orderService.findOne(orderId);
+        OrderDTO orderDTO = orderService.findOne(orderId);
         if (orderDTO == null) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }

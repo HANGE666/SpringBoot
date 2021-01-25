@@ -1,13 +1,13 @@
 package com.imooc.controller;
 
-import com.imooc.entity.ProductCategory;
-import com.imooc.entity.ProductInfo;
+import com.imooc.vo.ProductInfoVO;
+import com.imooc.vo.ProductVO;
+import com.imooc.vo.ResultVO;
+import com.imooc.dataobject.ProductCategory;
+import com.imooc.dataobject.ProductInfo;
 import com.imooc.service.CategoryService;
 import com.imooc.service.ProductService;
-import com.imooc.utils.ResultVoUtil;
-import com.imooc.vo.ProductInfoVo;
-import com.imooc.vo.ProductVo;
-import com.imooc.vo.ResultVo;
+import com.imooc.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResultVo list() {
+    public ResultVO list() {
         //1. 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
 
@@ -51,24 +51,24 @@ public class BuyerProductController {
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
         //3. 数据拼装
-        List<ProductVo> ProductVoList = new ArrayList<>();
+        List<ProductVO> productVOList = new ArrayList<>();
         for (ProductCategory productCategory: productCategoryList) {
-            ProductVo productVo = new ProductVo();
-            productVo.setCategoryType(productCategory.getCategoryType());
-            productVo.setCategoryName(productCategory.getCategoryName());
+            ProductVO productVO = new ProductVO();
+            productVO.setCategoryType(productCategory.getCategoryType());
+            productVO.setCategoryName(productCategory.getCategoryName());
 
-            List<ProductInfoVo> ProductInfoVoList = new ArrayList<>();
+            List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             for (ProductInfo productInfo: productInfoList) {
                 if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
-                    ProductInfoVo ProductInfoVo = new ProductInfoVo();
-                    BeanUtils.copyProperties(productInfo, ProductInfoVo);
-                    ProductInfoVoList.add(ProductInfoVo);
+                    ProductInfoVO productInfoVO = new ProductInfoVO();
+                    BeanUtils.copyProperties(productInfo, productInfoVO);
+                    productInfoVOList.add(productInfoVO);
                 }
             }
-            productVo.setProductInfoVOList(ProductInfoVoList);
-            ProductVoList.add(productVo);
+            productVO.setProductInfoVOList(productInfoVOList);
+            productVOList.add(productVO);
         }
 
-        return ResultVoUtil.success(ProductVoList);
+        return ResultVOUtil.success(productVOList);
     }
 }
