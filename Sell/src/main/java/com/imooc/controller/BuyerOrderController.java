@@ -1,8 +1,8 @@
 package com.imooc.controller;
 
-import com.imooc.vo.ResultVO;
+import com.imooc.vo.ResultVo;
 import com.imooc.converter.OrderForm2OrderDTOConverter;
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.form.OrderForm;
@@ -40,7 +40,7 @@ public class BuyerOrderController {
 
     //创建订单
     @PostMapping("/create")
-    public ResultVO<Map<String, String>> create(@Valid OrderForm orderForm,
+    public ResultVo<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("【创建订单】参数不正确, orderForm={}", orderForm);
@@ -48,13 +48,13 @@ public class BuyerOrderController {
                     bindingResult.getFieldError().getDefaultMessage());
         }
 
-        OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
+        OrderDto orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
         if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
             log.error("【创建订单】购物车不能为空");
             throw new SellException(ResultEnum.CART_EMPTY);
         }
 
-        OrderDTO createResult = orderService.create(orderDTO);
+        OrderDto createResult = orderService.create(orderDTO);
 
         Map<String, String> map = new HashMap<>();
         map.put("orderId", createResult.getOrderId());
@@ -64,7 +64,7 @@ public class BuyerOrderController {
 
     //订单列表
     @GetMapping("/list")
-    public ResultVO<List<OrderDTO>> list(@RequestParam("openid") String openid,
+    public ResultVo<List<OrderDto>> list(@RequestParam("openid") Integer openid,
                                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size) {
         if (StringUtils.isEmpty(openid)) {
@@ -73,7 +73,7 @@ public class BuyerOrderController {
         }
 
         PageRequest request = new PageRequest(page, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(openid, request);
+        Page<OrderDto> orderDTOPage = orderService.findList(openid, request);
 
         return ResultVOUtil.success(orderDTOPage.getContent());
     }
@@ -81,16 +81,16 @@ public class BuyerOrderController {
 
     //订单详情
     @GetMapping("/detail")
-    public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
-                                     @RequestParam("orderId") String orderId) {
-        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
+    public ResultVo<OrderDto> detail(@RequestParam("openid") Integer openid,
+                                     @RequestParam("orderId") Integer orderId) {
+        OrderDto orderDTO = buyerService.findOrderOne(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
 
     //取消订单
     @PostMapping("/cancel")
-    public ResultVO cancel(@RequestParam("openid") String openid,
-                           @RequestParam("orderId") String orderId) {
+    public ResultVo cancel(@RequestParam("openid") Integer openid,
+                           @RequestParam("orderId") Integer orderId) {
         buyerService.cancelOrder(openid, orderId);
         return ResultVOUtil.success();
     }

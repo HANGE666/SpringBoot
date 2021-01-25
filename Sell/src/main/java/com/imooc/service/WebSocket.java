@@ -18,7 +18,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @ServerEndpoint("/webSocket")
 @Slf4j
 public class WebSocket {
-
     private Session session;
 
     private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<>();

@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
-import com.imooc.dto.OrderDTO;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.imooc.dto.OrderDto;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
@@ -34,11 +35,11 @@ public class PayServiceImpl implements PayService {
     private OrderService orderService;
 
     @Override
-    public PayResponse create(OrderDTO orderDTO) {
+    public PayResponse create(OrderDto orderDto) {
         PayRequest payRequest = new PayRequest();
-        payRequest.setOpenid(orderDTO.getBuyerOpenid());
-        payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
-        payRequest.setOrderId(orderDTO.getOrderId());
+        payRequest.setOpenid(String.valueOf(orderDto.getBuyerOpenId()));
+        payRequest.setOrderAmount(orderDto.getOrderAmount().doubleValue());
+        payRequest.setOrderId(String.valueOf(orderDto.getOrderId()));
         payRequest.setOrderName(ORDER_NAME);
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
         log.info("【微信支付】发起支付, request={}", JsonUtil.toJson(payRequest));
@@ -59,7 +60,7 @@ public class PayServiceImpl implements PayService {
         log.info("【微信支付】异步通知, payResponse={}", JsonUtil.toJson(payResponse));
 
         //查询订单
-        OrderDTO orderDTO = orderService.findOne(payResponse.getOrderId());
+        OrderDto orderDTO = orderService.findOne(Integer.valueOf(payResponse.getOrderId()));
 
         //判断订单是否存在
         if (orderDTO == null) {
@@ -82,15 +83,12 @@ public class PayServiceImpl implements PayService {
         return payResponse;
     }
 
-    /**
-     * 退款
-     * @param orderDTO
-     */
+    //退款
     @Override
-    public RefundResponse refund(OrderDTO orderDTO) {
+    public RefundResponse refund(OrderDto orderDto) {
         RefundRequest refundRequest = new RefundRequest();
-        refundRequest.setOrderId(orderDTO.getOrderId());
-        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setOrderId(String.valueOf(orderDto.getOrderId()));
+        refundRequest.setOrderAmount(orderDto.getOrderAmount().doubleValue());
         refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
         log.info("【微信退款】request={}", JsonUtil.toJson(refundRequest));
 

@@ -1,6 +1,6 @@
 package com.imooc.service;
 
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 
 /**
  * 推送消息
@@ -8,10 +8,6 @@ import com.imooc.dto.OrderDTO;
  * 2017-07-30 22:08
  */
 public interface PushMessageService {
-
-    /**
-     * 订单状态变更消息
-     * @param orderDTO
-     */
-    void orderStatus(OrderDTO orderDTO);
+    //订单状态变更消息
+    void orderStatus(OrderDto orderDto);
 }

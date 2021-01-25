@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import com.imooc.dataobject.ProductCategory;
+import com.imooc.entity.ProductCategory;
 import com.imooc.exception.SellException;
 import com.imooc.form.CategoryForm;
 import com.imooc.service.CategoryService;

@@ -1,7 +1,7 @@
 package com.imooc.controller;
 
-import com.imooc.dataobject.ProductCategory;
-import com.imooc.dataobject.ProductInfo;
+import com.imooc.entity.ProductCategory;
+import com.imooc.entity.ProductInfo;
 import com.imooc.exception.SellException;
 import com.imooc.form.ProductForm;
 import com.imooc.service.CategoryService;
@@ -65,7 +65,7 @@ public class SellerProductController {
      * @return
      */
     @RequestMapping("/on_sale")
-    public ModelAndView onSale(@RequestParam("productId") String productId,
+    public ModelAndView onSale(@RequestParam("productId") Integer productId,
                                Map<String, Object> map) {
         try {
             productService.onSale(productId);
@@ -85,7 +85,7 @@ public class SellerProductController {
      * @return
      */
     @RequestMapping("/off_sale")
-    public ModelAndView offSale(@RequestParam("productId") String productId,
+    public ModelAndView offSale(@RequestParam("productId") Integer productId,
                                Map<String, Object> map) {
         try {
             productService.offSale(productId);
@@ -100,7 +100,7 @@ public class SellerProductController {
     }
 
     @GetMapping("/index")
-    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId,
+    public ModelAndView index(@RequestParam(value = "productId", required = false) Integer productId,
                       Map<String, Object> map) {
         if (!StringUtils.isEmpty(productId)) {
             ProductInfo productInfo = productService.findOne(productId);

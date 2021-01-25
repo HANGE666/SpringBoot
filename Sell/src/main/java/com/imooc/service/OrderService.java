@@ -1,6 +1,6 @@
 package com.imooc.service;
 
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,26 +9,19 @@ import org.springframework.data.domain.Pageable;
  * 2017-06-11 18:23
  */
 public interface OrderService {
-
     /** 创建订单. */
-    OrderDTO create(OrderDTO orderDTO);
-
+    OrderDto create(OrderDto orderDto);
     /** 查询单个订单. */
-    OrderDTO findOne(String orderId);
-
+    OrderDto findOne(Integer orderId);
     /** 查询订单列表. */
-    Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
-
+    Page<OrderDto> findList(Integer buyerOpenId, Pageable pageable);
     /** 取消订单. */
-    OrderDTO cancel(OrderDTO orderDTO);
-
+    OrderDto cancel(OrderDto orderDto);
     /** 完结订单. */
-    OrderDTO finish(OrderDTO orderDTO);
-
+    OrderDto finish(OrderDto orderDto);
     /** 支付订单. */
-    OrderDTO paid(OrderDTO orderDTO);
-
+    OrderDto paid(OrderDto orderDto);
     /** 查询订单列表. */
-    Page<OrderDTO> findList(Pageable pageable);
+    Page<OrderDto> findList(Pageable pageable);
 
 }

@@ -1,6 +1,6 @@
 package com.imooc.service;
 
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 import com.lly835.bestpay.model.PayResponse;
 import com.lly835.bestpay.model.RefundResponse;
 
@@ -10,10 +10,7 @@ import com.lly835.bestpay.model.RefundResponse;
  * 2017-07-04 00:53
  */
 public interface PayService {
-
-    PayResponse create(OrderDTO orderDTO);
-
+    PayResponse create(OrderDto orderDto);
     PayResponse notify(String notifyData);
-
-    RefundResponse refund(OrderDTO orderDTO);
+    RefundResponse refund(OrderDto orderDto);
 }

@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 import com.imooc.enums.ResultEnum;
 import com.imooc.exception.SellException;
 import com.imooc.service.OrderService;
@@ -40,7 +40,7 @@ public class SellerOrderController {
                              @RequestParam(value = "size", defaultValue = "10") Integer size,
                              Map<String, Object> map) {
         PageRequest request = new PageRequest(page - 1, size);
-        Page<OrderDTO> orderDTOPage = orderService.findList(request);
+        Page<OrderDto> orderDTOPage = orderService.findList(request);
         map.put("orderDTOPage", orderDTOPage);
         map.put("currentPage", page);
         map.put("size", size);
@@ -57,7 +57,7 @@ public class SellerOrderController {
     public ModelAndView cancel(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
         try {
-            OrderDTO orderDTO = orderService.findOne(orderId);
+            OrderDto orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
         } catch (SellException e) {
             log.error("【卖家端取消订单】发生异常{}", e);
@@ -80,7 +80,7 @@ public class SellerOrderController {
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderDto orderDTO = new OrderDto();
         try {
             orderDTO = orderService.findOne(orderId);
         }catch (SellException e) {
@@ -104,7 +104,7 @@ public class SellerOrderController {
     public ModelAndView finished(@RequestParam("orderId") String orderId,
                                  Map<String, Object> map) {
         try {
-            OrderDTO orderDTO = orderService.findOne(orderId);
+            OrderDto orderDTO = orderService.findOne(orderId);
             orderService.finish(orderDTO);
         } catch (SellException e) {
             log.error("【卖家端完结订单】发生异常{}", e);

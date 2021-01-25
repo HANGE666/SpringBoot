@@ -1,7 +1,8 @@
 package com.imooc.service.impl;
 
-import com.imooc.dataobject.ProductCategory;
-import com.imooc.repository.ProductCategoryRepository;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.imooc.entity.ProductCategory;
+import com.imooc.mapper.ProductCategoryMapper;
 import com.imooc.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,25 +18,29 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private ProductCategoryRepository repository;
+    private ProductCategoryMapper productCategoryMapper;
 
     @Override
     public ProductCategory findOne(Integer categoryId) {
-        return repository.findOne(categoryId);
+        QueryWrapper<ProductCategory> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("category_id",categoryId);
+        return productCategoryMapper.selectOne(queryWrapper);
     }
 
     @Override
     public List<ProductCategory> findAll() {
-        return repository.findAll();
+        QueryWrapper<ProductCategory> queryWrapper = new QueryWrapper<>();
+        return productCategoryMapper.selectList(queryWrapper);
     }
 
     @Override
-    public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
-        return repository.findByCategoryTypeIn(categoryTypeList);
+    public List<ProductCategory> findByCategoryTypeId(List<Integer> categoryTypeList) {
+        return productCategoryMapper.findByCategoryTypeId(categoryTypeList);
     }
 
     @Override
-    public ProductCategory save(ProductCategory productCategory) {
-        return repository.save(productCategory);
+    public String save(ProductCategory productCategory) {
+        productCategoryMapper.insert(productCategory);
+        return "成功保存";
     }
 }

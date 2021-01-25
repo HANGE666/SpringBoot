@@ -1,6 +1,6 @@
 package com.imooc.service;
 
-import com.imooc.dto.OrderDTO;
+import com.imooc.dto.OrderDto;
 
 /**
  * 买家
@@ -8,10 +8,8 @@ import com.imooc.dto.OrderDTO;
  * 2017-06-22 00:11
  */
 public interface BuyerService {
-
     //查询一个订单
-    OrderDTO findOrderOne(String openid, String orderId);
-
+    OrderDto findOrderOne(Integer openid, Integer orderId);
     //取消订单
-    OrderDTO cancelOrder(String openid, String orderId);
+    OrderDto cancelOrder(Integer openid, Integer orderId);
 }

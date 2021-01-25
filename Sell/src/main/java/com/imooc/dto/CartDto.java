@@ -8,15 +8,12 @@ import lombok.Data;
  * 2017-06-11 19:37
  */
 @Data
-public class CartDTO {
-
+public class CartDto {
     /** 商品Id. */
-    private String productId;
-
+    private Integer productId;
     /** 数量. */
     private Integer productQuantity;
-
-    public CartDTO(String productId, Integer productQuantity) {
+    public CartDto(Integer productId, Integer productQuantity) {
         this.productId = productId;
         this.productQuantity = productQuantity;
     }
